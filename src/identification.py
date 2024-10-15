@@ -1,7 +1,9 @@
-from schemas import Human, slots
-import pandas as pd
-from typing import Dict
 from datetime import datetime
+from typing import Dict
+
+import pandas as pd
+
+from schemas import Human, slots
 
 
 def parse_date(date_str: str) -> datetime:
@@ -71,3 +73,26 @@ def human_identification(data: pd.DataFrame) -> Dict[int, Human]:
         people[person.STD_NUMBER] = person
 
     return people
+
+
+def course_slots_automate(people):
+    """
+    Collects all unique course slots from the people data.
+
+    Args:
+        people (dict): Dictionary where keys are person identifiers and values are Human objects.
+
+    Returns:
+        List[int]: A list of unique course slots.
+    """
+    course_slot_set = set()
+
+    # Iterate through each person and add each course slot to the set
+    for person in people.values():
+        for slot in person.COURSE_SLOTS:
+            course_slot_set.add(slot)
+
+    # Convert the set to a list to return
+    unique_course_slots = sorted(list(course_slot_set))
+
+    return unique_course_slots
