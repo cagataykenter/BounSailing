@@ -47,6 +47,7 @@ class Group:
         self.COURSE_SLOTS: List[int] = self.calculate_course_slots_intersection()
         self.isPlaced: bool = False
         self.PLACED_SLOTS: List[int] = []
+        self.COURSE_LEVEL: str = ''
         self.check_course_level()
 
     def calculate_earliest_apply_date(self) -> Optional[datetime]:
